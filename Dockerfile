@@ -1,17 +1,18 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:alpine AS build-stage
+FROM golang:1.19 AS build-stage
 
 WORKDIR /app
 
-COPY . .
+COPY *.go ./
 
-RUN go build main.go 
+RUN CGO_ENABLED=0 GOOS=linux go build *.go
 
-FROM scratch
+FROM scratch  AS build-release-stage
 
 WORKDIR /
 
 COPY --from=build-stage /app .
 
-ENTRYPOINT [ "./main" ]
+CMD [ "./main" ]
+
