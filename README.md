@@ -25,11 +25,11 @@ Divirta-se!
 
 ### URL da imagem no dockerhub
 
-https://hub.docker.com/repository/docker/felipecardosooliveira/go/general
+https://hub.docker.com/repository/docker/felipecardosooliveira/fullcycle/general
 
 ## Executando no local
 
 ```bash
-$ docker run --rm --name docker-go felipecardosooliveira/go:prod
+$ docker run --rm --name docker-go felipecardosooliveira/fullcycle:prod
 
 
