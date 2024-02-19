@@ -4,9 +4,9 @@ FROM golang:1.19 AS build-stage
 
 WORKDIR /app
 
-COPY *.go ./
+COPY main.go ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build *.go
+RUN CGO_ENABLED=0 GOOS=linux go build main.go
 
 FROM scratch  AS build-release-stage
 
