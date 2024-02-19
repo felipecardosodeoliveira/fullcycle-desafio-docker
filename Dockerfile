@@ -1,17 +1,17 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.19
+FROM golang:alpine AS build-stage
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
+COPY . .
 
-RUN go mod download
+RUN go build main.go 
 
-COPY *.go ./
+FROM scratch
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+WORKDIR /
 
-EXPOSE 8080
+COPY --from=build-stage /app .
 
-CMD ["/docker-gs-ping"]
+ENTRYPOINT [ "./main" ]
